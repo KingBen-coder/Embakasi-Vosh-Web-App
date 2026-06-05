@@ -1,0 +1,40 @@
+{
+  "name": "Embakasi Vosh Church",
+  "short_name": "Embakasi Vosh",
+  "description": "A mobile-first church PWA for worship, sermons, events, giving, prayer, and community connection.",
+  "start_url": "./index.html#/home",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#0D47A1",
+  "categories": ["lifestyle", "social"],
+  "icons": [
+    {
+      "src": "assets/church-logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/church-logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Prayer Request",
+      "url": "./index.html#/prayer"
+    },
+    {
+      "name": "Give Online",
+      "url": "./index.html#/give"
+    },
+    {
+      "name": "Member Portal",
+      "url": "./index.html#/portal"
+    }
+  ]
+}
