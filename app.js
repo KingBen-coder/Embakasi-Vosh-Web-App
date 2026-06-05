@@ -5,6 +5,8 @@ const slides = [...document.querySelectorAll(".hero-slide")];
 const countdown = document.querySelector("[data-countdown]");
 const prayerForm = document.querySelector("[data-prayer-form]");
 const prayerStatus = document.querySelector("[data-prayer-status]");
+const registerForm = document.querySelector("[data-register-form]");
+const registerStatus = document.querySelector("[data-register-status]");
 const authForm = document.querySelector("[data-auth-form]");
 const authStatus = document.querySelector("[data-auth-status]");
 const paymentForm = document.querySelector("[data-payment-form]");
@@ -14,6 +16,10 @@ const lightbox = document.querySelector("[data-lightbox]");
 const year = document.querySelector("[data-year]");
 
 year.textContent = new Date().getFullYear();
+
+const SUPABASE_URL = "https://dwjodjrwoubuyefpxwpm.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ZCr12Hb5lkEbrkKSi97PTQ_qtLcHSkg";
+const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
 const routes = {
   "/": "home",
@@ -122,9 +128,78 @@ prayerForm.addEventListener("submit", (event) => {
   prayerStatus.textContent = "Your prayer request has been received. We are praying with you.";
 });
 
-authForm.addEventListener("submit", (event) => {
+async function writeAuditLog(action, metadata = {}) {
+  if (!supabaseClient) return;
+  const { data } = await supabaseClient.auth.getUser();
+  const userId = data?.user?.id;
+  if (!userId) return;
+
+  await supabaseClient.from("audit_logs").insert({
+    user_id: userId,
+    action,
+    entity_type: "auth",
+    metadata
+  });
+}
+
+registerForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  authStatus.textContent = "Supabase Auth ready: connect this form to sign in and trigger OTP or email verification.";
+  if (!supabaseClient) {
+    registerStatus.textContent = "Supabase could not load. Please check your internet connection and try again.";
+    return;
+  }
+
+  const formData = new FormData(registerForm);
+  const fullName = String(formData.get("full_name") || "").trim();
+  const email = String(formData.get("email") || "").trim();
+  const phone = String(formData.get("phone") || "").trim();
+  const password = String(formData.get("password") || "");
+
+  registerStatus.textContent = "Creating your member account...";
+  const { data, error } = await supabaseClient.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        full_name: fullName,
+        phone
+      }
+    }
+  });
+
+  if (error) {
+    registerStatus.textContent = error.message;
+    return;
+  }
+
+  registerForm.reset();
+  registerStatus.textContent = data.session
+    ? "Registration successful. Your member profile has been saved."
+    : "Registration received. Please check your email to confirm your account.";
+});
+
+authForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!supabaseClient) {
+    authStatus.textContent = "Supabase could not load. Please check your internet connection and try again.";
+    return;
+  }
+
+  const formData = new FormData(authForm);
+  const email = String(formData.get("email") || "").trim();
+  const password = String(formData.get("password") || "");
+
+  authStatus.textContent = "Signing you in...";
+  const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    authStatus.textContent = error.message;
+    return;
+  }
+
+  await writeAuditLog("member_logged_in", { email });
+  authForm.reset();
+  authStatus.textContent = "Login successful. Welcome back to the member portal.";
 });
 
 paymentForm.addEventListener("submit", (event) => {

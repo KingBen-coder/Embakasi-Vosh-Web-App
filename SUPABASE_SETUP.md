@@ -9,6 +9,13 @@ This project can use Supabase as the main backend for authentication, database r
 3. Keep the service role key private. Do not expose it in frontend code.
 4. Run `supabase-schema.sql` in the Supabase SQL editor.
 
+Current project connection:
+
+```text
+Project URL: https://dwjodjrwoubuyefpxwpm.supabase.co
+Publishable key: configured in app.js
+```
+
 ## 2. Frontend Environment
 
 For a future Next.js migration, use:
@@ -19,6 +26,8 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
 
 For the current static PWA, keep keys out of the repository and inject them at deploy time or add them manually in a local-only config file that is not committed.
+
+This prototype currently uses the publishable key directly in `app.js`, which is acceptable for browser-side Supabase Auth usage. Never place the Supabase service role key in frontend code.
 
 ## 3. Recommended Supabase Features
 

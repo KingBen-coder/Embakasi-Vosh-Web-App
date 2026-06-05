@@ -7,6 +7,7 @@ create type public.payment_category as enum ('tithe', 'offering', 'building_fund
 create table public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   full_name text,
+  email text unique,
   phone text unique,
   role public.member_role not null default 'member',
   ministry text,
@@ -129,6 +130,10 @@ create policy "Members can read their own audit logs"
   on public.audit_logs for select
   using (auth.uid() = user_id);
 
+create policy "Members can create their own audit logs"
+  on public.audit_logs for insert
+  with check (auth.uid() = user_id);
+
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
@@ -136,12 +141,22 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.profiles (id, full_name, phone)
+  insert into public.profiles (id, full_name, email, phone)
   values (
     new.id,
     coalesce(new.raw_user_meta_data->>'full_name', ''),
-    new.phone
+    new.email,
+    coalesce(new.phone, new.raw_user_meta_data->>'phone')
   );
+
+  insert into public.audit_logs (user_id, action, entity_type, metadata)
+  values (
+    new.id,
+    'member_registered',
+    'auth',
+    jsonb_build_object('email', new.email, 'phone', coalesce(new.phone, new.raw_user_meta_data->>'phone'))
+  );
+
   return new;
 end;
 $$;

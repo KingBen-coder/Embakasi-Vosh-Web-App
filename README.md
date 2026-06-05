@@ -15,6 +15,14 @@ Supabase is the recommended backend path for this project:
 
 Start with `SUPABASE_SETUP.md`, then run `supabase-schema.sql` in the Supabase SQL editor.
 
+The member portal is wired to:
+
+```text
+https://dwjodjrwoubuyefpxwpm.supabase.co
+```
+
+Registration creates a Supabase Auth user and, after the SQL trigger is installed, a matching `profiles` row with name, email, and phone. Registration and login activity are recorded in `audit_logs`.
+
 ## Run locally
 
 Use any static server from this folder. For example:

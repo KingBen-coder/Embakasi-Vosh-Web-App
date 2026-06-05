@@ -171,11 +171,20 @@
           <p>The current PWA is ready for Supabase Auth, secure sessions, payment records, sermons, events, and member dashboards.</p>
         </div>
         <div class="portal-grid">
+          <form class="app-form reveal" data-register-form>
+            <h3>Create Account</h3>
+            <label>Full name <input name="full_name" type="text" autocomplete="name" placeholder="Full name" required></label>
+            <label>Email <input name="email" type="email" autocomplete="email" placeholder="name@email.com" required></label>
+            <label>Phone <input name="phone" type="tel" autocomplete="tel" placeholder="+254 700 000 000"></label>
+            <label>Password <input name="password" type="password" autocomplete="new-password" placeholder="Create password" minlength="6" required></label>
+            <button class="btn btn-primary" type="submit">Register</button>
+            <p class="form-status" role="status" data-register-status></p>
+          </form>
           <form class="app-form reveal" data-auth-form>
             <h3>Member Login</h3>
-            <label>Phone or email <input name="identifier" type="text" autocomplete="username" placeholder="+254 700 000 000 or name@email.com" required></label>
+            <label>Email <input name="email" type="email" autocomplete="username" placeholder="name@email.com" required></label>
             <label>Password <input name="password" type="password" autocomplete="current-password" placeholder="Enter password" required></label>
-            <button class="btn btn-primary" type="submit">Send OTP</button>
+            <button class="btn btn-primary" type="submit">Login</button>
             <p class="form-status" role="status" data-auth-status></p>
           </form>
           <article class="dashboard-card reveal" aria-label="Member dashboard preview">
@@ -303,6 +312,7 @@
       <img alt="">
     </dialog>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="app.js" defer></script>
   </body>
 </html>
