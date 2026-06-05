@@ -168,7 +168,7 @@
         <div class="section-heading reveal">
           <p class="eyebrow">Member Platform</p>
           <h2>Registration, secure login, giving history, and church updates</h2>
-          <p>The current PWA is ready for a future API layer with OTP verification, JWT sessions, payment records, sermons, events, and member dashboards.</p>
+          <p>The current PWA is ready for Supabase Auth, secure sessions, payment records, sermons, events, and member dashboards.</p>
         </div>
         <div class="portal-grid">
           <form class="app-form reveal" data-auth-form>
@@ -182,7 +182,7 @@
             <div>
               <span class="status-pill">Dashboard Ready</span>
               <h3>Member Overview</h3>
-              <p>Future members can view sermons, upcoming events, giving history, ministry groups, and profile details after OTP verification.</p>
+            <p>Future members can view sermons, upcoming events, giving history, ministry groups, and profile details after Supabase verification.</p>
             </div>
             <div class="dashboard-metrics">
               <span><strong>3</strong> Sermons saved</span>
@@ -193,10 +193,10 @@
           <article class="architecture-card reveal">
             <h3>Backend Readiness</h3>
             <ul>
-              <li>Auth API: register, login, OTP, JWT refresh tokens</li>
-              <li>Payments API: M-Pesa STK Push, C2B, PayPal, callbacks</li>
-              <li>Content API: sermons, events, ministries, gallery</li>
-              <li>Audit logs: security tracking and admin activity</li>
+              <li>Supabase Auth: register, login, OTP, secure sessions</li>
+              <li>Edge Functions: M-Pesa STK Push, C2B, PayPal, callbacks</li>
+              <li>PostgreSQL: sermons, events, ministries, gallery records</li>
+              <li>RLS and audit logs: member data protection and admin tracking</li>
             </ul>
           </article>
         </div>
@@ -224,7 +224,7 @@
           <div>
             <p class="eyebrow">Online Giving</p>
             <h2>Support the ministry with confidence</h2>
-            <p>Give toward tithes, offerings, building fund, and missions support. This flow is prepared for Safaricom Daraja M-Pesa STK Push, C2B callbacks, PayPal, and card payment integration.</p>
+            <p>Give toward tithes, offerings, building fund, and missions support. This flow is prepared for Supabase Edge Functions connected to Safaricom Daraja M-Pesa STK Push, C2B callbacks, PayPal, and card payment integration.</p>
           </div>
           <div class="giving-options">
             <span>Tithes</span>

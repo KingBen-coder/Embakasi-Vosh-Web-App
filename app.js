@@ -124,12 +124,12 @@ prayerForm.addEventListener("submit", (event) => {
 
 authForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  authStatus.textContent = "OTP module ready: connect this form to the Auth API to send SMS or email verification.";
+  authStatus.textContent = "Supabase Auth ready: connect this form to sign in and trigger OTP or email verification.";
 });
 
 paymentForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  paymentStatus.textContent = "Payment module ready: connect this form to Daraja STK Push and webhook confirmation.";
+  paymentStatus.textContent = "Supabase Edge Function ready: connect this form to Daraja STK Push and webhook confirmation.";
 });
 
 gallery.addEventListener("click", (event) => {

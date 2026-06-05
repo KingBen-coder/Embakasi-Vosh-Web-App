@@ -2,7 +2,18 @@
 
 A mobile-first Progressive Web App for Embakasi Vosh Church with offline caching, installable app manifest, responsive navigation, hero carousel, sermons, events, giving, prayer requests, gallery, and contact sections.
 
-The current version is a static PWA prototype. The recommended production platform architecture is documented in `PLATFORM_ARCHITECTURE.md`.
+The current version is a static PWA prototype. The recommended production platform architecture is documented in `PLATFORM_ARCHITECTURE.md`, with Supabase setup details in `SUPABASE_SETUP.md`.
+
+## Supabase
+
+Supabase is the recommended backend path for this project:
+
+- Supabase Auth for member registration, login, OTP, and sessions.
+- Supabase PostgreSQL for users, sermons, events, giving, prayer requests, and audit logs.
+- Supabase Storage for gallery images and sermon media.
+- Supabase Edge Functions for M-Pesa Daraja, PayPal, and secure provider callbacks.
+
+Start with `SUPABASE_SETUP.md`, then run `supabase-schema.sql` in the Supabase SQL editor.
 
 ## Run locally
 
