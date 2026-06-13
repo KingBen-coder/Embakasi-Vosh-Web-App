@@ -124,6 +124,37 @@ textarea {
   padding: 0.4rem 0;
 }
 
+.nav-auth-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0.45rem 0.75rem !important;
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+}
+
+.nav-auth-primary,
+.nav-auth-button {
+  background: var(--blue-900);
+  color: var(--white);
+}
+
+.site-header:not(.is-scrolled):not(.menu-open) .nav-auth-primary,
+.site-header:not(.is-scrolled):not(.menu-open) .nav-auth-button {
+  background: var(--white);
+  color: var(--blue-900);
+}
+
+.nav-auth-button {
+  min-height: 38px;
+  padding: 0.45rem 0.75rem;
+  border: 0;
+  border-radius: var(--radius);
+  font-weight: 800;
+  cursor: pointer;
+}
+
 .menu-toggle {
   display: none;
   width: 44px;
@@ -409,6 +440,21 @@ h3 {
   align-items: stretch;
 }
 
+.auth-shell {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 1.5rem;
+  align-items: center;
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
 .ministry-card {
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
@@ -648,6 +694,13 @@ h3 {
   font-weight: 800;
 }
 
+.form-link {
+  color: var(--blue-900);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
 .contact-grid {
   align-items: stretch;
   grid-template-columns: 0.9fr 1.1fr 0.9fr;
@@ -771,6 +824,14 @@ h3 {
     border-radius: var(--radius);
   }
 
+  .nav-auth-link,
+  .nav-auth-button {
+    width: 100%;
+    justify-content: flex-start;
+    color: var(--blue-900);
+    background: transparent;
+  }
+
   .nav-links a:hover {
     background: var(--blue-100);
   }
@@ -796,6 +857,8 @@ h3 {
   .form-section,
   .contact-grid,
   .portal-grid,
+  .auth-shell,
+  .dashboard-grid,
   .give-panel {
     grid-template-columns: 1fr;
   }

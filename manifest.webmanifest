@@ -35,6 +35,14 @@
     {
       "name": "Member Portal",
       "url": "./index.html#/portal"
+    },
+    {
+      "name": "Login",
+      "url": "./index.html#/login"
+    },
+    {
+      "name": "Dashboard",
+      "url": "./index.html#/dashboard"
     }
   ]
 }

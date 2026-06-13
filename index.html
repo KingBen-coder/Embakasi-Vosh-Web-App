@@ -42,9 +42,14 @@
           <a href="#/sermons">Sermons</a>
           <a href="#/events">Events</a>
           <a href="#/portal">Portal</a>
+          <a href="#/dashboard" data-auth-link>Dashboard</a>
+          <a href="#/admin" data-admin-link hidden>Admin</a>
           <a href="#/gallery">Gallery</a>
           <a href="#/give">Give</a>
           <a href="#/contact">Contact</a>
+          <a class="nav-auth-link" href="#/login" data-guest-link>Login</a>
+          <a class="nav-auth-link nav-auth-primary" href="#/signup" data-guest-link>Sign Up</a>
+          <button class="nav-auth-button" type="button" data-logout-button hidden>Logout</button>
         </div>
       </nav>
     </header>
@@ -79,7 +84,7 @@
       <section class="quick-actions" aria-label="Quick actions">
         <a href="#/prayer">Submit Prayer Request</a>
         <a href="#/give">Give Online</a>
-        <a href="#/portal">Member Login</a>
+        <a href="#/login">Member Login</a>
       </section>
 
       <section class="section about-section" id="about">
@@ -171,22 +176,18 @@
           <p>The current PWA is ready for Supabase Auth, secure sessions, payment records, sermons, events, and member dashboards.</p>
         </div>
         <div class="portal-grid">
-          <form class="app-form reveal" data-register-form>
-            <h3>Create Account</h3>
-            <label>Full name <input name="full_name" type="text" autocomplete="name" placeholder="Full name" required></label>
-            <label>Email <input name="email" type="email" autocomplete="email" placeholder="name@email.com" required></label>
-            <label>Phone <input name="phone" type="tel" autocomplete="tel" placeholder="+254 700 000 000"></label>
-            <label>Password <input name="password" type="password" autocomplete="new-password" placeholder="Create password" minlength="6" required></label>
-            <button class="btn btn-primary" type="submit">Register</button>
-            <p class="form-status" role="status" data-register-status></p>
-          </form>
-          <form class="app-form reveal" data-auth-form>
-            <h3>Member Login</h3>
-            <label>Email <input name="email" type="email" autocomplete="username" placeholder="name@email.com" required></label>
-            <label>Password <input name="password" type="password" autocomplete="current-password" placeholder="Enter password" required></label>
-            <button class="btn btn-primary" type="submit">Login</button>
-            <p class="form-status" role="status" data-auth-status></p>
-          </form>
+          <article class="dashboard-card reveal">
+            <span class="status-pill">Login</span>
+            <h3>Member Access</h3>
+            <p>Sign in to view your dashboard, giving history, saved sermons, and member profile.</p>
+            <a class="btn btn-primary" href="#/login">Login</a>
+          </article>
+          <article class="dashboard-card reveal">
+            <span class="status-pill">Sign Up</span>
+            <h3>Create A Member Account</h3>
+            <p>Register with your name, email, phone number, and password. Supabase will create your profile securely.</p>
+            <a class="btn btn-outline" href="#/signup">Sign Up</a>
+          </article>
           <article class="dashboard-card reveal" aria-label="Member dashboard preview">
             <div>
               <span class="status-pill">Dashboard Ready</span>
@@ -207,6 +208,128 @@
               <li>PostgreSQL: sermons, events, ministries, gallery records</li>
               <li>RLS and audit logs: member data protection and admin tracking</li>
             </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section auth-section" id="login">
+        <div class="auth-shell">
+          <div class="form-copy reveal">
+            <p class="eyebrow">Login</p>
+            <h2>Welcome back</h2>
+            <p>Access your member dashboard, giving history, saved sermons, and church updates.</p>
+          </div>
+          <form class="app-form reveal" data-login-form>
+            <h3>Member Login</h3>
+            <label>Email <input name="email" type="email" autocomplete="username" placeholder="name@email.com" required></label>
+            <label>Password <input name="password" type="password" autocomplete="current-password" placeholder="Enter password" required></label>
+            <button class="btn btn-primary" type="submit">Login</button>
+            <p><a class="form-link" href="#/forgot-password">Forgot password?</a></p>
+            <p class="form-status" role="status" data-login-status></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section auth-section light-section" id="signup">
+        <div class="auth-shell">
+          <div class="form-copy reveal">
+            <p class="eyebrow">Sign Up</p>
+            <h2>Create your member account</h2>
+            <p>Join the digital church platform and keep your worship, fellowship, giving, and ministry connection in one place.</p>
+          </div>
+          <form class="app-form reveal" data-signup-form>
+            <h3>Register</h3>
+            <label>Full name <input name="full_name" type="text" autocomplete="name" placeholder="Full name" required></label>
+            <label>Email <input name="email" type="email" autocomplete="email" placeholder="name@email.com" required></label>
+            <label>Phone <input name="phone" type="tel" autocomplete="tel" placeholder="+254 700 000 000"></label>
+            <label>Password <input name="password" type="password" autocomplete="new-password" placeholder="Create password" minlength="6" required></label>
+            <button class="btn btn-primary" type="submit">Create Account</button>
+            <p class="form-status" role="status" data-signup-status></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section auth-section" id="forgot-password">
+        <div class="auth-shell">
+          <div class="form-copy reveal">
+            <p class="eyebrow">Password Help</p>
+            <h2>Reset your password</h2>
+            <p>Enter your account email and Supabase will send a secure password reset link.</p>
+          </div>
+          <form class="app-form reveal" data-forgot-form>
+            <h3>Forgot Password</h3>
+            <label>Email <input name="email" type="email" autocomplete="email" placeholder="name@email.com" required></label>
+            <button class="btn btn-primary" type="submit">Send Reset Link</button>
+            <p><a class="form-link" href="#/reset-password">I already opened my reset link</a></p>
+            <p class="form-status" role="status" data-forgot-status></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section auth-section light-section" id="reset-password">
+        <div class="auth-shell">
+          <div class="form-copy reveal">
+            <p class="eyebrow">New Password</p>
+            <h2>Create a new password</h2>
+            <p>Use this screen after opening a Supabase password recovery link.</p>
+          </div>
+          <form class="app-form reveal" data-reset-form>
+            <h3>Reset Password</h3>
+            <label>New password <input name="password" type="password" autocomplete="new-password" placeholder="New password" minlength="6" required></label>
+            <button class="btn btn-primary" type="submit">Update Password</button>
+            <p><a class="form-link" href="#/login">Back to login</a></p>
+            <p class="form-status" role="status" data-reset-status></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section protected-section light-section" id="dashboard" data-protected-route>
+        <div class="section-heading reveal">
+          <p class="eyebrow">Member Dashboard</p>
+          <h2 data-dashboard-title>Your church dashboard</h2>
+          <p data-dashboard-copy>Session details are loading...</p>
+        </div>
+        <div class="dashboard-grid">
+          <article class="dashboard-card reveal">
+            <span class="status-pill">Profile</span>
+            <h3 data-profile-name>Member</h3>
+            <p data-profile-email>Signed in member</p>
+            <p data-profile-role>Role: member</p>
+          </article>
+          <article class="dashboard-card reveal">
+            <span class="status-pill">Giving</span>
+            <h3>Giving History</h3>
+            <p>Your tithes, offerings, missions, and event payments will appear here after payment integration.</p>
+          </article>
+          <article class="dashboard-card reveal">
+            <span class="status-pill">Fellowship</span>
+            <h3>Saved Sermons & Events</h3>
+            <p>Use this protected area for member-only sermons, event registrations, and ministry updates.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section protected-section" id="admin" data-protected-route data-allowed-roles="admin,leader">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Leadership Area</p>
+          <h2>Admin and leader dashboard</h2>
+          <p>This protected route is reserved for admins and ministry leaders.</p>
+        </div>
+        <div class="dashboard-grid">
+          <article class="dashboard-card reveal">
+            <span class="status-pill">Content</span>
+            <h3>Church Content</h3>
+            <p>Manage sermons, events, ministries, and gallery records through Supabase tables.</p>
+          </article>
+          <article class="dashboard-card reveal">
+            <span class="status-pill">Security</span>
+            <h3>Audit Logs</h3>
+            <p>Review member registrations, logins, payment callbacks, and admin actions.</p>
+          </article>
+          <article class="dashboard-card reveal">
+            <span class="status-pill">Giving</span>
+            <h3>Payments</h3>
+            <p>Monitor M-Pesa, PayPal, tithes, offerings, and missions support records.</p>
           </article>
         </div>
       </section>

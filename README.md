@@ -45,6 +45,12 @@ The app uses hash routing so it can be hosted on static servers without rewrite 
 - `#/sermons`
 - `#/events`
 - `#/portal`
+- `#/login`
+- `#/signup`
+- `#/forgot-password`
+- `#/reset-password`
+- `#/dashboard`
+- `#/admin`
 - `#/gallery`
 - `#/give`
 - `#/prayer`
